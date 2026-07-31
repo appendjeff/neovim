@@ -32,6 +32,9 @@ return {
         time_format = "%H:%M",
       },
 
+      -- Completions
+      -- Do not use completion! Use my CMD-F macro in autocmds.lua
+
       ui = { enable = true },
     },
   },
