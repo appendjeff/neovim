@@ -9,13 +9,12 @@ return {
     },
   },
   {
-    "obsidian-nvim/obsidian.nvim",
+    "epwalsh/obsidian.nvim",
     version = "*",
     lazy = true,
     ft = "markdown",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
-      picker = { name = "snacks.picker" },
       workspaces = {
         { name = "personal", path = "~/Jammin" }, -- change this path
       },
