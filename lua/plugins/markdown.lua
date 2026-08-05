@@ -9,33 +9,28 @@ return {
     },
   },
   {
-    "epwalsh/obsidian.nvim",
+    "obsidian-nvim/obsidian.nvim",
     version = "*",
     lazy = true,
     ft = "markdown",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    -- dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
+      legacy_commands = false,
+      picker = { name = "snacks.picker" },
       workspaces = {
         { name = "personal", path = "~/Jammin" }, -- change this path
       },
+
+      link = {
+        style = "wiki",
+      },
+
       daily_notes = {
-        -- Optional, if you keep daily notes in a separate directory.
+        enabled = true,
         folder = "Daily",
-        -- Optional, if you want to change the date format for the ID of daily notes.
-        date_format = "%Y-%m-%d",
-        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
         template = "DailyNoteFormatNVIM.md",
+        date_format = "YYYY-MM-DD",
       },
-      templates = {
-        folder = "Daily",
-        date_format = "%Y-%m-%d",
-        time_format = "%H:%M",
-      },
-
-      -- Completions
-      -- Do not use completion! Use my CMD-F macro in autocmds.lua
-
-      ui = { enable = true },
     },
   },
 }
