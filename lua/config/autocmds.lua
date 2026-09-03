@@ -44,9 +44,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- In Claude Code temp buffers, <C-f> inserts an @"file" reference.
--- Scoped to /private/tmp/claude-* (the path Claude Code uses for EDITOR temp files).
+-- Scoped to the paths Claude Code uses for EDITOR temp files (/private/tmp on
+-- macOS, /tmp on Linux).
 vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "/private/tmp/claude-*",
+  pattern = { "/private/tmp/claude-*", "/tmp/claude-*" },
   callback = function(ev)
     vim.keymap.set("i", "<C-f>", function()
       Snacks.picker.files({
