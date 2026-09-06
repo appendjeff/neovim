@@ -1,3 +1,5 @@
+-- The Golden cheatsheet
+-- https://openscad.org/cheatsheet/snapshot.html
 return {
   {
     -- go-to-definition, hover docs, completion, signatures, formatting
@@ -21,11 +23,20 @@ return {
   {
     "salkin-mada/openscad.nvim",
     ft = "openscad",
+
+    -- Supported Mappings
+    -- <Enter> in normal mode — toggle cheatsheet window
+    -- <A-h> in normal mode — fuzzy-search help files
+    -- <A-m> in normal mode — open offline OpenSCAD manual via your PDF viewer
+    -- <A-o> in normal mode — open current file in OpenSCAD
+
     config = function()
       vim.g.openscad_default_mappings = true
       vim.g.openscad_fuzzy_finder = "snacks"
       vim.g.openscad_pdf_cmd = "open"
       require("openscad")
+
+      -- CUSTOM MAPPINGS BELOW
 
       -- <leader>oh: open the OpenSCAD help picker pre-filtered to the word
       -- under the cursor (help_source/tree file names match keywords like
