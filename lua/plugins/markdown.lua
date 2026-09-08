@@ -9,6 +9,7 @@ return {
     },
   },
   {
+    -- https://github.com/obsidian-nvim/obsidian.nvim
     "obsidian-nvim/obsidian.nvim",
     version = "*",
     lazy = true,

@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function(ev)
-    local vault = vim.fn.expand("~/Jammin")
+    local vault = vim.fn.expand("~/obsidian_vaults/JamPackedVault/")
     local file = vim.api.nvim_buf_get_name(ev.buf)
     if not file:find(vault, 1, true) then
       return
