@@ -11,6 +11,11 @@ vim.keymap.set("n", "<leader>fh", function()
   })
 end, { desc = "Find files (home dir)" })
 
+-- Reveal the current file in Finder
+vim.keymap.set("n", "<leader>fO", function()
+  vim.system({ "open", "-R", vim.fn.expand("%:p") })
+end, { desc = "Reveal file in Finder" })
+
 -- Add any additional keymaps here
 vim.keymap.set("n", "<leader>rr", ":terminal ./gradlew run<CR>", { desc = "Run project" })
 
