@@ -19,7 +19,7 @@ return {
       legacy_commands = false,
       picker = { name = "snacks.picker" },
       workspaces = {
-        { name = "personal", path = "~/obsidian_vaults/JamPackedVault" }, -- change this path
+        { name = "personal", path = "~/Documents/slang_obsidian_vault/" }, -- change this path
       },
 
       link = {
