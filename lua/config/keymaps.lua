@@ -16,6 +16,13 @@ vim.keymap.set("n", "<leader>fO", function()
   vim.system({ "open", "-R", vim.fn.expand("%:p") })
 end, { desc = "Reveal file in Finder" })
 
+-- Copy the current file path to the clipboard
+vim.keymap.set("n", "<leader>fy", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify(path, vim.log.levels.INFO, { title = "Copied path" })
+end, { desc = "Copy file path" })
+
 -- Add any additional keymaps here
 vim.keymap.set("n", "<leader>rr", ":terminal ./gradlew run<CR>", { desc = "Run project" })
 
