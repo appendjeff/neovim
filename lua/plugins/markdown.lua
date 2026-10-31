@@ -9,6 +9,16 @@ return {
     },
   },
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        marksman = {
+          enabled = false,
+        },
+      },
+    },
+  },
+  {
     -- https://github.com/obsidian-nvim/obsidian.nvim
     "obsidian-nvim/obsidian.nvim",
     version = "*",
