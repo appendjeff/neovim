@@ -6,6 +6,7 @@ return {
     opts = {
       servers = {
         harper_ls = {
+          enabled = false,
           settings = {
             ["harper-ls"] = {
               -- Share one dictionary with Neovim's built-in spell checker
