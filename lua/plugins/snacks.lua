@@ -3,8 +3,9 @@ return {
   opts = {
     picker = {
       sources = {
-        files = { exclude = { "build" } },
-        grep = { exclude = { "build" } },
+        files = { hidden = true, exclude = { "build" } },
+        grep = { hidden = true, exclude = { "build" } },
+        explorer = { hidden = true },
       },
     },
   },

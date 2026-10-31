@@ -26,3 +26,11 @@ vim.keymap.set("n", "<leader><BS>", ":bd<CR>", { desc = "Close buffer" })
 vim.keymap.set("n", "<leader>rp", function()
   vim.cmd("split | terminal python3 " .. vim.fn.expand("%"))
 end, { desc = "Run python file" })
+
+-- Fix the last misspelling with the first suggestion, keeping the cursor in place
+vim.keymap.set("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { desc = "Fix last misspelling" })
+
+-- Fuzzy-pick spelling suggestions
+vim.keymap.set("n", "z=", function()
+  Snacks.picker.spelling()
+end, { desc = "Spelling suggestions" })
