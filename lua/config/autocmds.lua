@@ -1,51 +1,6 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
-
---
-
--- Render the current markdown buffer in glow
---     In markdown buffers, override <C-j> (LazyVim default: move to lower window)
---     to render the current file with `glow -p` in a full-tab terminal. `:!`
---     doesn't reliably give glow a PTY (esp. under noice.nvim), so it falls out
---     of pager mode — termopen always allocates one.
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function(ev)
-    vim.keymap.set("n", "<C-j>", function()
-      local file = vim.api.nvim_buf_get_name(ev.buf)
-      if file == "" then
-        vim.cmd("file")
-        return
-      end
-      if vim.bo[ev.buf].modified then
-        vim.cmd("silent! write")
-      end
-      vim.cmd("tabnew")
-      local term_buf = vim.api.nvim_get_current_buf()
-      vim.fn.jobstart({ "glow", "-p", file }, {
-        term = true,
-        on_exit = function()
-          vim.schedule(function()
-            if vim.api.nvim_buf_is_valid(term_buf) then
-              vim.api.nvim_buf_delete(term_buf, { force = true })
-            end
-          end)
-        end,
-      })
-      vim.cmd("startinsert")
-    end, { buffer = ev.buf, desc = "Preview with glow (pager)" })
-  end,
-})
-
 -- In Claude Code temp buffers, <C-f> inserts an @"file" reference.
--- Scoped to the paths Claude Code uses for EDITOR temp files (/private/tmp on
--- macOS, /tmp on Linux).
+-- Scoped to the paths Claude Code uses for EDITOR temp files
+-- (/private/tmp on macOS, /tmp on Linux).
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = { "/private/tmp/claude-*", "/tmp/claude-*" },
   callback = function(ev)
@@ -69,7 +24,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function(ev)
-    local vault = vim.fn.expand("~/obsidian_vaults/JamPackedVault/")
+    local vault = vim.fn.expand(vim.env.OBSIDIAN_HOME)
     local file = vim.api.nvim_buf_get_name(ev.buf)
     if not file:find(vault, 1, true) then
       return
