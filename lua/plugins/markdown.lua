@@ -66,10 +66,10 @@ return {
         icons = { "" },
         position = "inline",
         width = "full",
-        border = true,
+        border = false,
         border_virtual = false,
-        border_prefix = true,
-        above = "___",
+        border_prefix = false,
+        above = "",
         below = "",
         backgrounds = {
           "RenderMarkdownH1Bg",
