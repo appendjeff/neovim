@@ -8,3 +8,8 @@ vim.opt.spelllang = { "en_us" }
 vim.opt.spelloptions:append("camel")
 -- Mix edit-distance and sound-alike scoring for suggestions
 vim.opt.spellsuggest = "double,9"
+
+-- Word Wrapping
+vim.opt.wrap = true -- soft-wrap long lines to the next screen line
+vim.opt.linebreak = true -- break at word boundaries, not mid-word
+vim.opt.breakindent = true -- keep the wrapped part at the same indent
