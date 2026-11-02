@@ -21,6 +21,7 @@ return {
   {
     -- https://github.com/obsidian-nvim/obsidian.nvim
     "obsidian-nvim/obsidian.nvim",
+    enabled = vim.env.OBSIDIAN_HOME ~= nil,
     version = "*",
     lazy = true,
     ft = "markdown",
