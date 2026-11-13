@@ -44,3 +44,22 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = ev.buf, desc = "Insert [[wikilink]] for Obsidian" })
   end,
 })
+
+-- Claude Code's "Show last response in external editor" prefixes the prompt
+-- buffer with its previous reply as "# " lines. Markdown reads every one of
+-- those as an H1, so treesitter colors them like headings. Dim them to Comment
+-- so the context block reads as the commentary it is.
+-- The matching render-markdown side (full-width heading bars) is handled by the
+-- `ignore` option in lua/plugins/markdown.lua, which must match these paths.
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = { "/private/tmp/claude-*", "/tmp/claude-*" },
+  callback = function()
+    -- winhighlight is a window-local highlight namespace, so this remaps the
+    -- treesitter groups in this window only, leaving other markdown buffers be.
+    local remaps = { "@markup.heading:Comment" }
+    for level = 1, 6 do
+      table.insert(remaps, ("@markup.heading.%d.markdown:Comment"):format(level))
+    end
+    vim.wo.winhighlight = table.concat(remaps, ",")
+  end,
+})

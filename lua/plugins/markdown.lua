@@ -59,6 +59,14 @@ return {
       enabled = true,
       render_modes = { "n", "c", "t" },
       file_types = { "markdown", "gitcommit" },
+      -- Claude Code prompt temp files are markdown whose "# " context block is
+      -- commentary, not headings. Never attach here, otherwise every one of
+      -- those lines gets a full-width RenderMarkdownH1Bg bar. The treesitter
+      -- side is dimmed by the matching autocmd in lua/config/autocmds.lua.
+      ignore = function(buf)
+        local name = vim.api.nvim_buf_get_name(buf)
+        return name:find("^/private/tmp/claude%-") ~= nil or name:find("^/tmp/claude%-") ~= nil
+      end,
       html = { enabled = false },
       completions = { lsp = { enabled = true } },
       checkbox = { enabled = true, checked = { scope_highlight = "@markup.strikethrough" } },
